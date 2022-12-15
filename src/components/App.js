@@ -3,29 +3,31 @@ import Snake from './Snake';
 import Food from './Food';
 import styles from "../styles/index.css";
 
+
 const getRandomCoordinates = () => {
   let min = 1;
   let max = 98;
-  let x = Math.floor((Math.random()*(max-min+1)+min)/2)*2;
-  let y =  Math.floor((Math.random()*(max-min+1)+min)/2)*2;
-  return [x,y]
+  let x = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
+  let y = Math.floor((Math.random() * (max - min + 1) + min) / 2) * 2;
+  return [x, y]
 }
+
 const initialState = {
   food: getRandomCoordinates(),
   speed: 200,
   direction: 'RIGHT',
   snakeDots: [
-    [0,0],
-    [2,0]
+    [0, 0],
+    [2, 0]
   ]
 }
 
-
-
 class App extends Component {
+
   state = initialState;
 
   componentDidMount() {
+    this.moveSnake();
     setInterval(this.moveSnake, this.state.speed);
     document.onkeydown = this.onKeyDown;
   }
@@ -40,16 +42,16 @@ class App extends Component {
     e = e || window.event;
     switch (e.keyCode) {
       case 38:
-        this.setState({direction: 'UP'});
+        this.setState({ direction: 'UP' });
         break;
       case 40:
-        this.setState({direction: 'DOWN'});
+        this.setState({ direction: 'DOWN' });
         break;
       case 37:
-        this.setState({direction: 'LEFT'});
+        this.setState({ direction: 'LEFT' });
         break;
       case 39:
-        this.setState({direction: 'RIGHT'});
+        this.setState({ direction: 'RIGHT' });
         break;
     }
   }
@@ -130,12 +132,13 @@ class App extends Component {
     this.setState(initialState)
   }
 
-  render() {
 
+
+  render() {
     return (
       <div className="game-area">
-        <Snake snakeDots={this.state.snakeDots}/>
-        <Food dot={this.state.food}/>
+        <Snake snakeDots={this.state.snakeDots} />
+        <Food dot={this.state.food} />
       </div>
     );
   }
